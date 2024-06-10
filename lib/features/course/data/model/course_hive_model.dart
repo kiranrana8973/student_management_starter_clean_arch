@@ -44,6 +44,11 @@ class CourseHiveModel {
     return hiveModels.map((hiveModel) => hiveModel.toEntity()).toList();
   }
 
+  // to hive model
+  List<CourseHiveModel> fromEntityList(List<CourseEntity> entities) {
+    return entities.map((entity) => fromEntity(entity)).toList();
+  }
+
   @override
   String toString() {
     return 'courseId: $courseId, courseName: $courseName';

@@ -10,8 +10,7 @@ final splashViewModelProvider =
 class SplashViewModel extends StateNotifier<void> {
   SplashViewModel(this.navigator) : super(null);
 
-  final SplashViewNavigator navigator ;
-
+  final SplashViewNavigator navigator;
 
   // Open Login page
   void openLoginView() {
