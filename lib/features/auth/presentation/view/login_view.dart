@@ -85,7 +85,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         if (_formKey.currentState!.validate()) {
                           ref
                               .read(loginViewModelProvider.notifier)
-                              .openBatchView();
+                              .openHomeView();
                         }
                       },
                       child: const SizedBox(

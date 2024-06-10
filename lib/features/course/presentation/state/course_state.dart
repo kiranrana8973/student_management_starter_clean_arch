@@ -3,18 +3,18 @@ import 'package:student_management_starter/features/course/domain/entity/course_
 class CourseState {
   final bool isLoading;
   final String? error;
-  final List<CourseEntity> courses;
+  final List<CourseEntity> lstCourses;
 
   const CourseState({
     required this.isLoading,
     required this.error,
-    required this.courses,
+    required this.lstCourses,
   });
 
   factory CourseState.initial() => const CourseState(
         isLoading: false,
         error: null,
-        courses: [],
+        lstCourses: [],
       );
 
   CourseState copyWith({
@@ -25,7 +25,7 @@ class CourseState {
     return CourseState(
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,
-      courses: courses ?? this.courses,
+      lstCourses: courses ?? lstCourses,
     );
   }
 }

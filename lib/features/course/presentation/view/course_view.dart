@@ -78,10 +78,10 @@ class _AddCourseViewState extends ConsumerState<CourseView> {
                 const CircularProgressIndicator(),
               } else if (courseState.error != null) ...{
                 Text(courseState.error!),
-              } else if (courseState.courses.isNotEmpty) ...{
+              } else if (courseState.lstCourses.isNotEmpty) ...{
                 Expanded(
                   child: LoadCourse(
-                    lstCourse: courseState.courses,
+                    lstCourse: courseState.lstCourses,
                     ref: ref,
                   ),
                 ),

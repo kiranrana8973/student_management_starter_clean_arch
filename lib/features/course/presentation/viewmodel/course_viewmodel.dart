@@ -28,7 +28,7 @@ class CourseViewModel extends StateNotifier<CourseState> {
         showMySnackBar(message: l.error, color: Colors.red);
       },
       (r) {
-        state.courses.remove(course);
+        state.lstCourses.remove(course);
         state = state.copyWith(isLoading: false, error: null);
         showMySnackBar(
           message: 'Course delete successfully',

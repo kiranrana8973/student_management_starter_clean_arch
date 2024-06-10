@@ -11,8 +11,6 @@ class HomeViewNavigator with LoginViewRoute {}
 
 mixin HomeViewRoute {
   openHomeView() {
-    NavigateRoute.pushRoute(const HomeView());
+    NavigateRoute.popAndPushRoute(const HomeView());
   }
 }
-
-
