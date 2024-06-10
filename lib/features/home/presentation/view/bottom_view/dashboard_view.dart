@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/core/common/my_snackbar.dart';
 import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
 import 'package:student_management_starter/features/course/presentation/viewmodel/course_viewmodel.dart';
+import 'package:student_management_starter/features/home/presentation/viewmodel/home_viewmodel.dart';
 import 'package:student_management_starter/features/home/presentation/widget/batch_widget.dart';
 import 'package:student_management_starter/features/home/presentation/widget/course_widget.dart';
 
@@ -42,7 +43,9 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ref.read(homeViewModelProvider.notifier).logout();
+            },
             icon: const Icon(
               Icons.logout,
               color: Colors.white,
