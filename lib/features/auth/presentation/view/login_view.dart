@@ -16,8 +16,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
   final _usernameController = TextEditingController(text: 'kiran');
   final _passwordController = TextEditingController(text: 'kiran123');
 
-  // final _usernameController = TextEditingController();
-  // final _passwordController = TextEditingController();
   final _gap = const SizedBox(height: 8);
   bool isObscure = true;
   @override
@@ -83,9 +81,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          ref
-                              .read(loginViewModelProvider.notifier)
-                              .openHomeView();
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .loginStudent(
+                                _usernameController.text,
+                                _passwordController.text,
+                              );
                         }
                       },
                       child: const SizedBox(
@@ -106,7 +107,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       key: const ValueKey('registerButton'),
                       onPressed: () {
                         ref
-                            .read(loginViewModelProvider.notifier)
+                            .read(authViewModelProvider.notifier)
                             .openRegisterView();
                       },
                       child: const SizedBox(

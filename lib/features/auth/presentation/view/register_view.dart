@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
+import 'package:student_management_starter/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:student_management_starter/features/batch/domain/entity/batch_entity.dart';
 import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
@@ -46,11 +48,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   final _key = GlobalKey<FormState>();
 
-  final _fnameController = TextEditingController();
-  final _lnameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _fnameController = TextEditingController(text: 'kiran');
+  final _lnameController = TextEditingController(text: 'kiran123');
+  final _phoneController = TextEditingController(text: '989898989898');
+  final _usernameController = TextEditingController(text: 'kiran');
+  final _passwordController = TextEditingController(text: 'kiran123');
 
   bool isObscure = true;
 
@@ -283,7 +285,23 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_key.currentState!.validate()) {}
+                        if (_key.currentState!.validate()) {
+                          var student = AuthEntity(
+                            fname: _fnameController.text,
+                            lname: _lnameController.text,
+                            image:
+                                ref.read(authViewModelProvider).imageName ?? '',
+                            phone: _phoneController.text,
+                            username: _usernameController.text,
+                            password: _passwordController.text,
+                            batch: _dropDownValue!,
+                            courses: _lstCourseSelected,
+                          );
+
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .registerStudent(student);
+                        }
                       },
                       child: const Text('Register'),
                     ),

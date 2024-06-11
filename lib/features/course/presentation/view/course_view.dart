@@ -18,6 +18,9 @@ class _AddCourseViewState extends ConsumerState<CourseView> {
   Widget build(BuildContext context) {
     var courseState = ref.watch(courseViewModelProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Course Management'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
