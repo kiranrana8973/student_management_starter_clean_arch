@@ -35,6 +35,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       if (image != null) {
         setState(() {
           _img = File(image.path);
+          /// send tp server
         });
       } else {
         return;
