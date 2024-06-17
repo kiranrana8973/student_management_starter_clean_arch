@@ -35,7 +35,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
       if (image != null) {
         setState(() {
           _img = File(image.path);
-          /// send tp server
+          // Send image to server
+          ref.read(authViewModelProvider.notifier).uploadImage(
+                _img!,
+              );
         });
       } else {
         return;
@@ -290,6 +293,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           var student = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
+                            // Read the image from state
                             image:
                                 ref.read(authViewModelProvider).imageName ?? '',
                             phone: _phoneController.text,
