@@ -27,4 +27,8 @@ class AuthUseCase {
       String username, String password) async {
     return await _authRepository.loginStudent(username, password);
   }
+
+  Future<Either<Failure, AuthEntity>> getCurrentUser() async {
+    return await _authRepository.getCurrentUser();
+  }
 }

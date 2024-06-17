@@ -7,6 +7,7 @@ import 'package:student_management_starter/app/constants/api_endpoint.dart';
 import 'package:student_management_starter/core/failure/failure.dart';
 import 'package:student_management_starter/core/networking/remote/http_service.dart';
 import 'package:student_management_starter/core/shared_prefs/user_shared_prefs.dart';
+import 'package:student_management_starter/features/auth/data/model/auth_api_model.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
 
 final authRemoteDataSourceProvider = Provider(
@@ -106,6 +107,44 @@ class AuthRemoteDataSource {
         // Save token to shared prefs
         await userSharedPrefs.setUserToken(token);
         return const Right(true);
+      } else {
+        return Left(
+          Failure(
+            error: response.data["message"],
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(
+        Failure(
+          error: e.error.toString(),
+          statusCode: e.response?.statusCode.toString() ?? '0',
+        ),
+      );
+    }
+  }
+
+  Future<Either<Failure, AuthEntity>> getCurrentUser() async {
+    try {
+      // Get the token from shared prefs
+      String? token;
+      var data = await userSharedPrefs.getUserToken();
+      data.fold(
+        (l) => token = null,
+        (r) => token = r!,
+      );
+
+      var response = await dio.get(
+        ApiEndpoints.currentUser,
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        AuthApiModel authApiModel = AuthApiModel.fromJson(response.data);
+        return Right(authApiModel.toEntity());
       } else {
         return Left(
           Failure(

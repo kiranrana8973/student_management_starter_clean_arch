@@ -52,7 +52,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  Future<void> loginStudent(
+  loginStudent(
     String username,
     String password,
   ) async {
@@ -68,6 +68,23 @@ class AuthViewModel extends StateNotifier<AuthState> {
         openHomeView();
       },
     );
+  }
+
+  Future<void> getCurrentUser() async {
+    state = state.copyWith(isLoading: true);
+    authUseCase.getCurrentUser().then((data) {
+      data.fold(
+        (failure) {
+          state = state.copyWith(isLoading: false, error: failure.error);
+          showMySnackBar(message: failure.error, color: Colors.red);
+        },
+        (user) {
+          state =
+              state.copyWith(isLoading: false, authEntity: user, error: null);
+          navigator.openHomeView();
+        },
+      );
+    });
   }
 
   void openRegisterView() {

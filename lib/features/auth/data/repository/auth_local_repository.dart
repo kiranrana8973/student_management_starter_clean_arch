@@ -32,4 +32,10 @@ class AuthLocalRepository implements IAuthRepository {
   Future<Either<Failure, String>> uploadProfilePicture(File file) async {
     return const Right("");
   }
+
+  @override
+  Future<Either<Failure, AuthEntity>> getCurrentUser() {
+    // TODO: implement getCurrentUser
+    throw UnimplementedError();
+  }
 }
