@@ -23,8 +23,7 @@ class CourseRemoteRepository implements ICourseRepository {
 
   @override
   Future<Either<Failure, bool>> deleteCourse(String id) {
-    // TODO: implement deleteCourse
-    throw UnimplementedError();
+    return courseRemoteDataSource.deleteCourse(id);
   }
 
   @override

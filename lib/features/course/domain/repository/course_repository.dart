@@ -13,3 +13,5 @@ abstract class ICourseRepository {
   Future<Either<Failure, List<CourseEntity>>> getAllCourses();
   Future<Either<Failure, bool>> deleteCourse(String id);
 }
+
+
