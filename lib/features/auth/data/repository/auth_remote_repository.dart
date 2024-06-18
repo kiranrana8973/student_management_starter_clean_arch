@@ -8,14 +8,14 @@ import 'package:student_management_starter/features/auth/domain/entity/auth_enti
 import 'package:student_management_starter/features/auth/domain/repository/auth_repository.dart';
 
 final authRemoteRepositoryProvider = Provider<IAuthRepository>((ref) {
-  return AuthRemoteRepositoy(
+  return AuthRemoteRepository(
     ref.read(authRemoteDataSourceProvider),
   );
 });
 
-class AuthRemoteRepositoy implements IAuthRepository {
+class AuthRemoteRepository implements IAuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
-  AuthRemoteRepositoy(this._authRemoteDataSource);
+  AuthRemoteRepository(this._authRemoteDataSource);
 
   @override
   Future<Either<Failure, String>> uploadProfilePicture(File file) {
@@ -34,7 +34,6 @@ class AuthRemoteRepositoy implements IAuthRepository {
 
   @override
   Future<Either<Failure, AuthEntity>> getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
+   return _authRemoteDataSource.getCurrentUser();
   }
 }

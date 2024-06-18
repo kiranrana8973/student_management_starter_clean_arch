@@ -7,6 +7,7 @@ import 'package:student_management_starter/app/constants/api_endpoint.dart';
 import 'package:student_management_starter/core/failure/failure.dart';
 import 'package:student_management_starter/core/networking/remote/http_service.dart';
 import 'package:student_management_starter/core/shared_prefs/user_shared_prefs.dart';
+import 'package:student_management_starter/features/auth/data/dto/get_current_user_dto.dart';
 import 'package:student_management_starter/features/auth/data/model/auth_api_model.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
 
@@ -131,8 +132,8 @@ class AuthRemoteDataSource {
       String? token;
       var data = await userSharedPrefs.getUserToken();
       data.fold(
-        (l) => token = null,
-        (r) => token = r!,
+            (l) => token = null,
+            (r) => token = r!,
       );
 
       var response = await dio.get(
@@ -143,8 +144,9 @@ class AuthRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        AuthApiModel authApiModel = AuthApiModel.fromJson(response.data);
-        return Right(authApiModel.toEntity());
+        GetCurrentUserDto getCurrentUserDto = GetCurrentUserDto.fromJson(response.data);
+
+        return Right(getCurrentUserDto.toEntity());
       } else {
         return Left(
           Failure(

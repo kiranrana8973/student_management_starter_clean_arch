@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:student_management_starter/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:student_management_starter/features/batch/presentation/view/batch_view.dart';
 import 'package:student_management_starter/features/course/presentation/view/course_view.dart';
 import 'package:student_management_starter/features/home/presentation/view/bottom_view/dashboard_view.dart';
@@ -20,6 +21,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     const BatchView(),
     const ProfileView(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

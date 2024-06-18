@@ -1,6 +1,8 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:student_management_starter/app/constants/api_endpoint.dart';
 import 'package:student_management_starter/features/auth/presentation/viewmodel/auth_view_model.dart';
+import 'package:student_management_starter/features/home/presentation/viewmodel/profile_viewmodel.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
   const ProfileView({super.key});
@@ -12,21 +14,39 @@ class ProfileView extends ConsumerStatefulWidget {
 class _ProfileViewState extends ConsumerState<ProfileView> {
   @override
   void initState() {
-    ref.read(authViewModelProvider.notifier).getCurrentUser();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authViewModelProvider);
-    return const SizedBox.expand(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Profile View'),
-        ],
-      ),
-    );
+    final currentUser = ref.watch(profileViewModelProvider);
+
+    if (currentUser.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return SizedBox.expand(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 300,
+              width: 300,
+              child: Image.network(
+                  '${ApiEndpoints.imageUrl}${currentUser.authEntity!.image!}'),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "First Name : ${currentUser.authEntity?.fname ?? ""}",
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 }
 
