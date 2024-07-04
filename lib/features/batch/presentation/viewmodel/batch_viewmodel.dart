@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
+import 'package:student_management_starter/core/common/snackbar/my_snackbar.dart';
 import 'package:student_management_starter/features/batch/domain/entity/batch_entity.dart';
 import 'package:student_management_starter/features/batch/domain/usecases/batch_usecase.dart';
 import 'package:student_management_starter/features/batch/presentation/state/batch_state.dart';

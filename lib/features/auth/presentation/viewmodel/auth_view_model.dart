@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
+import 'package:student_management_starter/core/common/snackbar/my_snackbar.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
 import 'package:student_management_starter/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:student_management_starter/features/auth/presentation/navigator/login_navigator.dart';

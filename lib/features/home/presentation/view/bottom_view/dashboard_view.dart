@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
+import 'package:student_management_starter/core/common/provider/is_dark_theme.dart';
+import 'package:student_management_starter/core/common/snackbar/my_snackbar.dart';
 import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
 import 'package:student_management_starter/features/course/presentation/viewmodel/course_viewmodel.dart';
 import 'package:student_management_starter/features/home/presentation/viewmodel/home_viewmodel.dart';
@@ -56,7 +57,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               onChanged: (value) {
                 setState(() {
                   isDark = value;
-                  // ref.read(isDarkThemeProvider.notifier).updateTheme(value);
+                  ref.read(isDarkThemeProvider.notifier).updateTheme(value);
                 });
               }),
         ],

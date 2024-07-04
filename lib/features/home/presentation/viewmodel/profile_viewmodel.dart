@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
+import 'package:student_management_starter/core/common/snackbar/my_snackbar.dart';
 import 'package:student_management_starter/features/auth/data/model/auth_hive_model.dart';
 import 'package:student_management_starter/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:student_management_starter/features/home/presentation/state/current_user_state.dart';
