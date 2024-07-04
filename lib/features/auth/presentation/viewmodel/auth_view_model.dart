@@ -61,7 +61,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
     data.fold(
       (failure) {
         state = state.copyWith(isLoading: false, error: failure.error);
-        showMySnackBar(message: failure.error, color: Colors.red);
+        //  showMySnackBar(message: failure.error, color: Colors.red);
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
@@ -69,8 +69,6 @@ class AuthViewModel extends StateNotifier<AuthState> {
       },
     );
   }
-
-
 
   void openRegisterView() {
     navigator.openRegisterView();
