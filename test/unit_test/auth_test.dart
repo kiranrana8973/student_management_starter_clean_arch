@@ -15,6 +15,8 @@ import 'auth_test.mocks.dart';
   MockSpec<LoginViewNavigator>(),
 ])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late AuthUseCase mockAuthUsecase;
   late ProviderContainer container;
   late LoginViewNavigator mockLoginViewNavigator;
@@ -22,7 +24,6 @@ void main() {
   setUp(() {
     mockAuthUsecase = MockAuthUseCase();
     mockLoginViewNavigator = MockLoginViewNavigator();
-    TestWidgetsFlutterBinding.ensureInitialized();
     container = ProviderContainer(overrides: [
       authViewModelProvider.overrideWith(
         (ref) => AuthViewModel(mockLoginViewNavigator, mockAuthUsecase),
@@ -38,6 +39,30 @@ void main() {
   });
 
   // Login test
+  test('login test with valid username and password', () async {
+    // Arrange
+    when(mockAuthUsecase.loginStudent('kiran', 'kiran123'))
+        .thenAnswer((_) => Future.value(const Right(true)));
+
+    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234')).thenAnswer(
+      (_) => Future.value(
+        Left(
+          Failure(error: 'Invalid'),
+        ),
+      ),
+    );
+
+    // Act
+    await container
+        .read(authViewModelProvider.notifier)
+        .loginStudent('kiran', 'kiran123');
+
+    final authState = container.read(authViewModelProvider);
+
+    // Assert
+    expect(authState.error, isNull);
+  });
+
   test('login test with valid username and password', () async {
     // Arrange
     const correctUsername = 'kiran';
@@ -63,26 +88,7 @@ void main() {
     expect(authState.error, isNull);
   });
 
-  test('login test with valid username and password', () async {
-    // Arrange
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran123'))
-        .thenAnswer((_) => Future.value(const Right(true)));
-
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234'))
-        .thenAnswer((_) => Future.value(Left(
-              Failure(error: 'Invalid'),
-            )));
-
-    // Act
-    await container
-        .read(authViewModelProvider.notifier)
-        .loginStudent('kiran', 'kiran123');
-
-    final authState = container.read(authViewModelProvider);
-
-    // Assert
-    expect(authState.error, isNull);
-  });
+  test('Register User', () {});
 
   tearDown(
     () {

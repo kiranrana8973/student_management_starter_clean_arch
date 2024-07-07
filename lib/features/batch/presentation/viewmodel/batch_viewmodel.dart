@@ -27,11 +27,11 @@ class BatchViewmodel extends StateNotifier<BatchState> {
     data.fold(
       (l) {
         state = state.copyWith(isLoading: false, error: l.error);
-        showMySnackBar(message: l.error, color: Colors.red);
+        // showMySnackBar(message: l.error, color: Colors.red);
       },
       (r) {
         state = state.copyWith(isLoading: false, error: null);
-        showMySnackBar(message: "Batch added successfully");
+        //  showMySnackBar(message: "Batch added successfully");
       },
     );
 
