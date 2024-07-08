@@ -36,7 +36,7 @@ android {
     defaultConfig {
         applicationId = "com.student_management.student_management_starter"
         // minSdk = flutter.minSdkVersion
-        minSdk = 19
+        minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName

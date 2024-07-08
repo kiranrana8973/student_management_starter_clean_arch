@@ -21,15 +21,19 @@ void main() {
   late ProviderContainer container;
   late LoginViewNavigator mockLoginViewNavigator;
 
-  setUp(() {
-    mockAuthUsecase = MockAuthUseCase();
-    mockLoginViewNavigator = MockLoginViewNavigator();
-    container = ProviderContainer(overrides: [
-      authViewModelProvider.overrideWith(
-        (ref) => AuthViewModel(mockLoginViewNavigator, mockAuthUsecase),
-      )
-    ]);
-  });
+  setUp(
+    () {
+      mockAuthUsecase = MockAuthUseCase();
+      mockLoginViewNavigator = MockLoginViewNavigator();
+      container = ProviderContainer(
+        overrides: [
+          authViewModelProvider.overrideWith(
+            (ref) => AuthViewModel(mockLoginViewNavigator, mockAuthUsecase),
+          )
+        ],
+      );
+    },
+  );
 
   test('check for the inital state in Auth state', () {
     final authState = container.read(authViewModelProvider);
@@ -44,13 +48,12 @@ void main() {
     when(mockAuthUsecase.loginStudent('kiran', 'kiran123'))
         .thenAnswer((_) => Future.value(const Right(true)));
 
-    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234')).thenAnswer(
-      (_) => Future.value(
-        Left(
-          Failure(error: 'Invalid'),
-        ),
-      ),
-    );
+    when(mockAuthUsecase.loginStudent('kiran', 'kiran1234'))
+        .thenAnswer((_) => Future.value(
+              Left(
+                Failure(error: 'Invalid Credentails'),
+              ),
+            ));
 
     // Act
     await container

@@ -19,17 +19,19 @@ void main() {
   late ProviderContainer container;
   late BatchUseCase mockBatchUseCase;
   late List<BatchEntity> lstBatches;
-  setUp(() {
-    mockBatchUseCase = MockBatchUseCase();
-    lstBatches = BatchTestData.getBatchTestData();
-    container = ProviderContainer(
-      overrides: [
-        batchViewmodelProvider.overrideWith(
-          (ref) => BatchViewmodel(mockBatchUseCase),
-        )
-      ],
-    );
-  });
+  setUp(
+    () {
+      mockBatchUseCase = MockBatchUseCase();
+      lstBatches = BatchTestData.getBatchTestData();
+      container = ProviderContainer(
+        overrides: [
+          batchViewmodelProvider.overrideWith(
+            (ref) => BatchViewmodel(mockBatchUseCase),
+          )
+        ],
+      );
+    },
+  );
 
   // Test initial state
   test('check batch initial state', () async {
@@ -69,3 +71,5 @@ void main() {
     container.dispose();
   });
 }
+
+
