@@ -8,7 +8,7 @@ import 'package:student_management_starter/features/batch/domain/usecases/batch_
 import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
 
 import 'batch_test.mocks.dart';
-import 'test_data/batch_entity_data.dart';
+import 'test_data/batch_test_data.dart';
 
 @GenerateNiceMocks([
   MockSpec<BatchUseCase>(),

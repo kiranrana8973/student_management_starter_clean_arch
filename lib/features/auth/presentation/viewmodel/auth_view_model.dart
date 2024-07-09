@@ -52,7 +52,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  loginStudent(
+  Future<void> loginStudent(
     String username,
     String password,
   ) async {

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:student_management_starter/app/navigator_key/navigator_key.dart';
+import 'package:student_management_starter/app/themes/app_theme.dart';
 import 'package:student_management_starter/core/failure/failure.dart';
 import 'package:student_management_starter/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:student_management_starter/features/auth/presentation/navigator/login_navigator.dart';
@@ -17,16 +18,17 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   late AuthUseCase mockAuthUsecase;
-  late LoginViewNavigator mockLoginViewNavigator;
 
   setUp(
     () {
       mockAuthUsecase = MockAuthUseCase();
-      mockLoginViewNavigator = MockLoginViewNavigator();
+      // mockLoginViewNavigator = MockLoginViewNavigator();
     },
   );
 
-  testWidgets('Login with username and password', (tester) async {
+  testWidgets(
+      'Login with username and password and check weather dashboard opens or not',
+      (tester) async {
     // Arrange
     const correctUsername = 'kiran';
     const correctPassword = 'kiran123';
@@ -37,26 +39,30 @@ void main() {
       return Future.value(
           username == correctUsername && password == correctPassword
               ? const Right(true)
-              : Left(Failure(error: 'Invalid Credentials')));
+              : Left(Failure(error: 'Invalid Credentails')));
     });
 
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
           authViewModelProvider.overrideWith(
-            (ref) => AuthViewModel(mockLoginViewNavigator, mockAuthUsecase),
+            (ref) => AuthViewModel(
+              ref.read(loginViewNavigatorProvider),
+              mockAuthUsecase,
+            ),
           )
         ],
         child: MaterialApp(
           navigatorKey: AppNavigator.navigatorKey,
+          debugShowCheckedModeBanner: false,
+          title: 'Student Management',
+          theme: AppTheme.getApplicationTheme(false),
           home: const LoginView(),
         ),
       ),
     );
     await tester.pumpAndSettle();
-    // Type in first textformfield/TextField
-    await tester.enterText(find.byType(TextField).at(0), 'kiran');
-    // Type in second textformfield
+    await tester.enterText(find.byType(TextField).at(0), 'kiran12');
     await tester.enterText(find.byType(TextField).at(1), 'kiran123');
 
     await tester.tap(
