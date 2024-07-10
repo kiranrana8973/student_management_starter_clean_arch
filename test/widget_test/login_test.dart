@@ -16,11 +16,9 @@ import '../unit_test/auth_test.mocks.dart';
 void main() {
   late AuthUseCase mockAuthUsecase;
 
-  setUp(
-    () {
-      mockAuthUsecase = MockAuthUseCase();
-    },
-  );
+  setUp(() {
+    mockAuthUsecase = MockAuthUseCase();
+  });
 
   testWidgets(
       'Login with username and password and check weather dashboard opens or not',

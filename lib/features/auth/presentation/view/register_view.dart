@@ -52,11 +52,17 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   final _key = GlobalKey<FormState>();
 
-  final _fnameController = TextEditingController(text: 'kiran');
-  final _lnameController = TextEditingController(text: 'kiran123');
-  final _phoneController = TextEditingController(text: '989898989898');
-  final _usernameController = TextEditingController(text: 'kiran');
-  final _passwordController = TextEditingController(text: 'kiran123');
+  // final _fnameController = TextEditingController(text: 'kiran');
+  // final _lnameController = TextEditingController(text: 'kiran123');
+  // final _phoneController = TextEditingController(text: '989898989898');
+  // final _usernameController = TextEditingController(text: 'kiran');
+  // final _passwordController = TextEditingController(text: 'kiran123');
+
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   bool isObscure = true;
 

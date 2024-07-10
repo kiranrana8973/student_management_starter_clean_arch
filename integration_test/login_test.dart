@@ -62,7 +62,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(0), 'kiran12');
+    await tester.enterText(find.byType(TextField).at(0), 'kiran');
     await tester.enterText(find.byType(TextField).at(1), 'kiran123');
 
     await tester.tap(

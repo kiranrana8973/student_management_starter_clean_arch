@@ -26,5 +26,3 @@ class BatchTestData {
     return lstBatches;
   }
 }
-
-
