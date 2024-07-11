@@ -77,7 +77,7 @@ void main() {
       return Future.value(
           username == correctUsername && password == correctPassword
               ? const Right(true)
-              : Left(Failure(error: 'Invalid')));
+              : Left(Failure(error: 'Invalid Credentails')));
     });
 
     // Act

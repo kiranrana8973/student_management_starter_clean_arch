@@ -23,7 +23,6 @@ import '../test/unit_test/batch_test.mocks.dart';
 import '../test/unit_test/course_test.mocks.dart';
 import '../test/unit_test/test_data/batch_test_data.dart';
 import '../test/unit_test/test_data/course_test_data.dart';
-
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +31,9 @@ void main() {
   late BatchUseCase mockBatchUsecase;
   late CourseUseCase mockCourseUsecase;
 
+  // Dropdown
   late List<BatchEntity> lstBatches;
+  // Multiselect
   late List<CourseEntity> lstCourses;
 
   setUp(() {
@@ -56,6 +57,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
+          // Mock -> Fake call
           batchViewmodelProvider.overrideWith(
             (ref) => BatchViewmodel(mockBatchUsecase),
           ),
@@ -64,7 +66,9 @@ void main() {
           ),
           authViewModelProvider.overrideWith(
             (ref) => AuthViewModel(
-                ref.read(loginViewNavigatorProvider), mockAuthUsecase),
+              ref.read(loginViewNavigatorProvider),
+              mockAuthUsecase,
+            ),
           ),
         ],
         child: MaterialApp(
